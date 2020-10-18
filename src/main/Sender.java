@@ -31,7 +31,7 @@ public class Sender {
     public void run() {
         SEND_DATA_EXECUTOR.execute(() -> {
             try {
-                startSendingData(STOPPED);
+                startSendingData();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -42,8 +42,8 @@ public class Sender {
         SEND_DATA_EXECUTOR.shutdown();
     }
 
-    private void startSendingData(AtomicBoolean stopped) throws InterruptedException {
-        while (!stopped.get()) {
+    private void startSendingData() throws InterruptedException {
+        while (!STOPPED.get()) {
             List<Data> arrayData = new ArrayList<>();
             MESSAGES_QUEUE.drainTo(arrayData, MAX_BATCH_SIZE);
             try {
