@@ -1,10 +1,10 @@
 # Caching proxy
 
-##How to run
+## How to run
 To run this, go to the project folder and execute command: sh run.sh. Then the program starts working. 
 Java 8 or later needs to be installed.
 
-##How it works
+## How it works
 ProxyServerEmulator class emulates some http server. It has the queue of incoming http requests INCOMING_REQUESTS_QUEUE. When some http request comes, it is put to this queue.
 Then, SERVER_HANDLER_POOL threadpool takes requests from INCOMING_REQUESTS_QUEUE and handles them. Data to be sent to the main server is put to SENDER's incoming queue.
 Then, SENDER's thread in SEND_DATA_EXECUTOR takes the next data batch and tries to send it to the server. If it fails, timeout happens and then the sending is executed next time. 
